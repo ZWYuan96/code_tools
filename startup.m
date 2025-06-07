@@ -12,6 +12,4 @@ run(setup_pth(1:end-1))
 addpath(genpath(fullfile(a, 'data_process')))
 
 fprintf('All custom functions are added to path.\n')
-
-
 fprintf('++++++++++++++++ Loading ends ++++++++++++++++++\n')
