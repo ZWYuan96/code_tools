@@ -5,8 +5,10 @@ cp = mfilename('fullpath');
 [a, b, c] = fileparts(cp);
 
 % setup irt
-[~, setup_pth] = system('find . -type f -wholename "*non_cartisan_processing/irt/setup.m"');
-run(setup_pth(1:end-1))
+%[~, setup_pth] = system('find . -type f -wholename "*non_cartisan_processing/irt/setup.m"');
+%run(setup_pth(1:end-1))
+setup_pth = fullfile(a, 'non_cartisan_processing/irt/setup.m');
+run(setup_pth);
 
 % add customized functions
 addpath(genpath(fullfile(a, 'data_process')))

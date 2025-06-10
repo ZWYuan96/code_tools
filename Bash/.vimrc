@@ -97,3 +97,5 @@ let g:solarized_termtrans=1
 " in ~/.vim/colors/ and uncomment:
 " colorscheme solarized
 " test
+"
+" test2
