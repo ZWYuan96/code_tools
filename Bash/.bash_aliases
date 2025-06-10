@@ -1,3 +1,10 @@
-#alias matlab='~/Ziwen/matlab_2024/bin/matlab -nosplash -nosoftwareopengl -sd "~/Ziwen/matlab_start/"'
-alias matlab='/home/ziwen_10820/Ziwen/matlab_2024/bin/matlab -nosplash -sd "/home/ziwen_10820/Ziwen/code_tools/Matlab/"'
+# For matlab
+export PATH="$HOME/Ziwen/matlab_2024/bin:$PATH"
+export matlabtoolpth="$HOME/Ziwen/code_tools/Matlab"
+export matlabpth=$(which matlab)
+if [ $?==0 ];then
+    alias matlab="$matlabpth -nosplash -sd "$matlabtoolpth""
+else
+    echo 'Warning: Matlab path is not correctly set! Check .bashrc and .bash_aliases'
+fi
 alias gits='git status'
