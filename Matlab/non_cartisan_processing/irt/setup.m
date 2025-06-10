@@ -2,7 +2,10 @@
 % run this file to set up matlab path etc.
 % you may need to modify this depending on how you installed the toolbox
 % so this should be considered simply a "guide" not a robust script.
-irtdir = '/home/ziwen_ubuntu/Ziwen/Matlab_tools/non_cartisan_processing/irt';
+% irtdir = '/home/ziwen_ubuntu/Ziwen/Matlab_tools/non_cartisan_processing/irt';
+
+irtfp = mfilename('fullpath'); % get the full path to this file
+[irtdir, ~] = fileparts(irtfp); % remove the file name to get directory
 
 if ~exist('irtdir', 'var')
 	disp('The variable "irtdir" is not set, so trying default, assuming')
