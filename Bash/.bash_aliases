@@ -9,4 +9,9 @@ if [ $?==0 ];then
 else
     echo 'Warning: Matlab path is not correctly set! Check .bashrc and .bash_aliases'
 fi
+
+# For git
 alias gits='git status'
+
+# For globus
+alias globus="source $HOME/Ziwen/Globus/globusconnectpersonal"
