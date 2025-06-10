@@ -42,6 +42,7 @@ classdef data_process < dynamicprops
                     if ~isfield(obj.experiments, exp_name)
                         obj.experiments.(exp_name) = struct;
                     end
+                    obj.resave
                     return
                     
                 else
@@ -65,6 +66,7 @@ classdef data_process < dynamicprops
                     obj.experiments.(exp_name).(data_name).data_path = {};
                     obj.experiments.(exp_name).(data_name).data_content = {};
                 end
+                obj.resave;
             elseif nargin == 4
                 assert(isa(exp_name, 'string') + isa(exp_name, 'char'));
                 assert(isa(data_name, 'string') + isa(data_name, 'char'));
@@ -78,6 +80,7 @@ classdef data_process < dynamicprops
                 end
 
                 obj = obj.append_paths(data_path, exp_name, data_name);
+                obj.resave;
             end            
         end
 
@@ -87,6 +90,7 @@ classdef data_process < dynamicprops
             obj.experiments.(exp_name).(case_name) = struct('data_path', 1, 'data_content', 1);
             obj.experiments.(exp_name).(case_name).data_path = {};
             obj.experiments.(exp_name).(case_name).data_content = {};
+            obj.resave;
         end
         
         function obj = append_paths(obj, data_paths, exp, dat)
@@ -101,9 +105,11 @@ classdef data_process < dynamicprops
                 check_e = obj.multi_e*duplicate_e;
                 if  check_e || ~duplicate_e
                     obj.append_one_path(data_paths, exp, dat);
+                    obj.resave;
                     return
                 else
                     warning("The following path does not exist: %s ..... skipping it ... \n", data_paths);
+                    obj.resave;
                     return
                 end
             else 
@@ -125,6 +131,7 @@ classdef data_process < dynamicprops
                     end
                 end
             end
+            obj.resave;
         end
 
         function obj = append_one_path(obj, data_pths, exp, dat)
@@ -146,17 +153,14 @@ classdef data_process < dynamicprops
             dataf = strcmp(obj.experiments.(exp).(dat).data_path, data_pths);
             if isempty(obj.experiments.(exp).(dat).data_path)
                 obj.experiments.(exp).(dat).data_path{end+1, 1} = data_pths;
-                obj.resave
                 return
             end
 
             if sum(dataf)
                 warning('Data path is already added!')
-                obj.resave;
                 return
             else
                 obj.experiments.(exp).(dat).data_path{end+1, 1} = data_pths;
-                obj.resave
                 return
             end
 
@@ -183,7 +187,6 @@ classdef data_process < dynamicprops
             %         end
             %     end
             
-
         end
 
         % function e = check_path(obj, pathi)
@@ -192,6 +195,7 @@ classdef data_process < dynamicprops
         % end
         function obj = append_content(obj, contents, exp, dat)
             obj.experiments.(exp).(dat).data_content = contents;
+            obj.resave;
         end
 
         function obj = table_generate(obj, exp, dat)
@@ -202,6 +206,7 @@ classdef data_process < dynamicprops
                 obj.experiments.(exp).(dat).out_table.(targeti0) = obj.load_data(obj.experiments.(exp).(dat).data_path, ...
                     targeti);
             end
+            obj.resave;
         end
 
         function readout = load_data(obj, paths, target_exps)
