@@ -1,6 +1,8 @@
 # For matlab
-export PATH="$HOME/Ziwen/matlab_2024/bin:$PATH"
-export matlabtoolpth="$HOME/Ziwen/code_tools/Matlab"
+export zwroot="$HOME/Ziwen"
+
+export PATH="$zwroot/matlab_2024/bin:$PATH"
+export matlabtoolpth="$zwroot/code_tools/Matlab"
 export matlabpth=$(which matlab)
 if [ $?==0 ];then
     alias matlab="$matlabpth -nosplash -sd "$matlabtoolpth""
